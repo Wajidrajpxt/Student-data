@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>JavaScript</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+            border-radius: 5px;
+            /* display: flex; */
+        }
+        h1{
+            font-size: 50px;
+            font-weight: 700;
+            color: blueviolet;
+        }
+        .main {
+            padding: 1px;
+            height: max-content;
+            width: 100%;
+            /* border: 1px solid #000; */
+            /* background-color: silver; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .inputs {
+            height: 20vh;
+            width: 70%;
+            /* border: 1px solid #000; */
+            /* display: flex; */
+            /* justify-content: space-around; */
+            /* align-items: center; */
+            flex-direction: column;
+        }
+
+        .name {
+            height: 10vh;
+            width: 300px;
+            margin-left: 20px;
+            border: 3px solid wheat;
+            font-size: 20px;
+            /* background-color: black; */
+        }
+
+        .sub {
+            height: 10vh;
+            width: 300px;
+            /* background-color: black; */
+            border: 3px solid wheat;
+            font-size: 20px;
+            font-size: 20px;
+        }
+
+        .age {
+            height: 10vh;
+            /* background-color: black; */
+            width: 300px;
+            border: 3px solid wheat;
+            /* color: white; */
+            font-size: 20px;
+        }
+
+        .mini {
+            height: 40vh;
+            width: 70%;
+            /* color: white; */
+            
+        }
+        
+        .msg {
+            height: 75%;
+            width: 100%;
+            border: 4px solid wheat;
+            /* border: 1px solid #000; */
+            /* color: white; */
+            font-size: 20px;
+        }
+
+        .container {
+            height: max-content;
+            width: 90%;
+            display: flex;
+            flex-wrap: wrap;
+            /* border: 4px solid wheat; */
+         
+            margin-left: 5%;
+        }
+
+        .btn {
+            height: 50px;
+            width: 150px;
+            border: 1px solid wheat;
+            background-color: blueviolet;
+            color: white;
+            font-size: 21px;
+            cursor: pointer;
+        }
+
+        .childer {
+            height: 40vh;
+            width: 300px;
+            border: 4px solid blueviolet;
+             background-color: wheat;
+            font-size: 20px;
+            color: black;
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+            padding-left: 1rem;
+            margin-left: 30px;
+            margin-top: 30px;
+        }
+
+        .markx {
+            height: 40px;
+            width: 40px;
+            border: 1px solid #000;
+            background-color: red;
+            color: white;
+            margin-left: 85%;
+            border-radius: 5px;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .icon {
+            font-size: 24px;
+        }
+
+        .removed {
+            display: none;
+            visibility: hidden;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <h1>Student data</h1>
+        <div class="inputs">
+            <input class="name subclass" type="text" placeholder="Name">
+            <input class="sub subclass" type="text" placeholder="Subject">
+            <input class="age subclass" type="number" placeholder="Age">
+        </div>
+        <div class="mini">
+            <textarea class="msg" placeholder="Messsage" name="" id="" cols="30" rows="10"></textarea>
+        </div>
+        <button class="btn">Add</button>
+    </div>
+
+    <div class="container"></div>
+
+
+    <script>
+        let arry = JSON.parse(localStorage.getItem('studentdata'))|| []
+        let extra = document.querySelectorAll(".subclass")
+        // console.log(extra);
+        let nam = document.querySelector('.name')
+        let sub = document.querySelector('.sub')
+        let ag = document.querySelector('.age')
+        let sms = document.querySelector('.msg')
+        let con = document.querySelector('.container')
+        let add = document.querySelector('.btn')
+
+        // let ary = JSON.parse(localStorage.getItem('anything')) || [] 
+        // let arye = JSON.parse(localStorage.getItem('data')) || []
+      
+        add.addEventListener("click", () => {
+            
+            let named = nam.value
+
+            let subject = sub.value
+
+            let aged = ag.value
+
+            let mg = sms.value
+
+            if(named == ""|| subject == "" || aged == ""|| mg == ""){
+                alert(' fill the Blanks Please')
+            }
+            else{
+                console.log(add);
+            let child = document.createElement("div")
+            child.classList.add('childer')
+            con.appendChild(child)
+
+            let mark = document.createElement("div")
+            mark.classList.add('markx')
+            child.appendChild(mark)
+
+            
+            
+            child.innerHTML = `<p>Name: <span>${named}</span> </p> <p>Subject: <span>${subject} </span></p> <p>Age: <span>${aged}</span></p><p>Mesage:<span>${mg}</span></p>`
+            
+            
+            
+            let icon = document.createElement("i")
+            icon.classList.add("fa-solid", "fa-xmark")
+            mark.appendChild(icon)
+        
+        
+            mark.addEventListener('click', function () {
+                console.log(mark);
+                child.classList.add('removed')
+            })            
+            let obj ={names:nam.value,subject: sub.value, ages : ag.value , msgs:sms.value}            
+            arry.push(obj)            
+            localStorage.setItem("studentdata",JSON.stringify(arry))
+        }
+    })
+
+    // localStorage.setItem('data',JSON.stringify(arye))
+    // localStorage.setItem('data',JSON.stringify(arye))
+    // // localStorage.setItem(data,JSON.stringify(arye))
+    // localStorage.setItem('data',JSON.stringify(arrrye))
+
+    let obje = {names :nam.value, subject:sub.value, ageed:ag.value, msgs:sms.value}
+
+
+        // arye.push(obj)
+//   1  // json.stringify: obj form ma chezy use krna k lia 
+// 2    
+
+        // let arrrye = JSON.parse(localStorage.getItem('data'))||[]
+
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+let arry  = json.parse(localStorage.getItem(data,anything)) || []
+
+localStorage.setItem("data",JSON.stringify())
